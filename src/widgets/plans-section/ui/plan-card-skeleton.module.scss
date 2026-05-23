@@ -23,15 +23,15 @@
     max-width: 100%;
     box-sizing: border-box;
     padding: 16px;
-    border: 1px solid rgba(190, 78, 255, 0.35);
+    border: 1px solid var(--purple-border-soft);
     border-radius: 32px;
-    background: linear-gradient(90deg, rgba(190, 78, 255, 0.08) 0%, rgba(255, 74, 183, 0.08) 100%);
+    background: var(--surface-card);
 }
 
 .bone {
     display: block;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.14);
+    background: var(--skeleton-bone);
     animation: skeletonPulse 1.4s ease-in-out infinite;
 }
 
@@ -42,7 +42,7 @@
     gap: 12px;
     padding: 14px 12px;
     border-radius: 24px;
-    background: rgba(67, 43, 84, 0.55);
+    background: var(--surface-header-muted);
 }
 
 .titleBlock {

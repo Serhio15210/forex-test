@@ -19,12 +19,12 @@ $block-radius: 16px;
     gap: 8px;
     padding: 4px 4px 4px 9px;
     border-radius: 999px;
-    background: rgba(255, 237, 248, 0.8);
+    background: var(--surface-specs-bar);
     transition: background-color 0.25s ease;
 }
 
 .specsBarOpen {
-    background: rgba(154, 66, 232, 1);
+    background: var(--violet);
 
     .specsText {
         color: var(--text);
@@ -54,13 +54,13 @@ $block-radius: 16px;
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: rgba(157, 146, 165, 1);
+    background: var(--surface-menu-button);
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .menuButtonActive {
-    background: #ffffff;
+    background: var(--white);
 }
 
 .menuDots {
@@ -68,9 +68,11 @@ $block-radius: 16px;
     width: 3px;
     height: 11px;
     background:
-        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center top / 3px 3px no-repeat,
-        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center / 3px 3px no-repeat,
-        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center bottom / 3px 3px no-repeat;
+        radial-gradient(circle, var(--white) 1.5px, transparent 1.6px) center top / 3px 3px
+            no-repeat,
+        radial-gradient(circle, var(--white) 1.5px, transparent 1.6px) center / 3px 3px no-repeat,
+        radial-gradient(circle, var(--white) 1.5px, transparent 1.6px) center bottom / 3px 3px
+            no-repeat;
     transition:
         width 0.2s ease,
         height 0.2s ease,
@@ -81,9 +83,12 @@ $block-radius: 16px;
     width: 11px;
     height: 3px;
     background:
-        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) left center / 3px 3px no-repeat,
-        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) center / 3px 3px no-repeat,
-        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) right center / 3px 3px no-repeat;
+        radial-gradient(circle, var(--menu-dots-inactive) 1.5px, transparent 1.6px) left center /
+            3px 3px no-repeat,
+        radial-gradient(circle, var(--menu-dots-inactive) 1.5px, transparent 1.6px) center / 3px
+            3px no-repeat,
+        radial-gradient(circle, var(--menu-dots-inactive) 1.5px, transparent 1.6px) right center /
+            3px 3px no-repeat;
 }
 
 .dropdownPanel {
@@ -116,7 +121,7 @@ $block-radius: 16px;
 .dropdownPanelInner {
     overflow: hidden;
     border-radius: $block-radius;
-    box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-dropdown);
 }
 
 .dropdown {
@@ -126,7 +131,7 @@ $block-radius: 16px;
     margin: 0;
     padding: 10px;
     border-radius: $block-radius;
-    background: rgba(154, 66, 232, 1);
+    background: var(--violet);
     list-style: none;
 }
 
@@ -138,12 +143,7 @@ $block-radius: 16px;
     padding: 3px 8px;
     padding-right: 15px;
     border-radius: 6px;
-    background: linear-gradient(
-        90deg,
-        rgba(249, 240, 237, 0.3) 0%,
-        rgba(204, 203, 211, 0.16) 40%,
-        rgba(225, 220, 223, 0.3) 100%
-    );
+    background: var(--surface-dropdown-row);
 }
 
 .dropdownLabel {

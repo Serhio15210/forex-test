@@ -1,14 +1,105 @@
 @use "@/shared/styles/mixins.scss" as *;
 
 :root {
+    /* Base */
+    --white: #ffffff;
     --text: rgba(255, 255, 255, 1);
     --text-h: #08060d;
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.75);
+    --text-subtle: rgba(255, 255, 255, 0.55);
+    --text-tag: rgba(255, 255, 255, 0.9);
+    --text-option: rgba(190, 172, 199, 1);
+
     --bg: linear-gradient(180deg, rgba(190, 78, 255, 0.1) 0%, rgba(255, 74, 183, 0.1) 100%);
+
+    /* Borders */
     --border: rgba(255, 255, 255, 0.2);
+    --border-subtle: rgba(255, 255, 255, 0.12);
+    --border-disabled: rgba(255, 255, 255, 0.25);
+
+    /* Accent & brand */
     --accent: rgba(255, 74, 183, 1);
     --accent-bg: rgba(197, 64, 146, 1);
+    --accent-secondary: rgba(200, 48, 185, 1);
+    --accent-hover-bg: rgba(255, 74, 183, 0.12);
     --accent-border: rgba(170, 59, 255, 0.5);
+
+    --purple: rgba(190, 78, 255, 1);
+    --purple-border: rgba(190, 78, 255, 0.5);
+    --purple-border-soft: rgba(190, 78, 255, 0.35);
+
+    --violet: rgba(154, 66, 232, 1);
+    --violet-deep: rgba(111, 47, 149, 1);
+    --violet-plum: rgba(83, 45, 114, 1);
+    --tag-bg: rgba(145, 62, 245, 0.2);
+
     --yellow: rgba(255, 245, 153, 1);
+
+    /* Surfaces */
+    --surface-header: rgba(67, 43, 84, 1);
+    --surface-header-muted: rgba(67, 43, 84, 0.55);
+    --surface-tooltip: rgba(43, 27, 54, 0.98);
+    --surface-glass: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(153, 153, 153, 0.1) 100%
+    );
+    --surface-card: linear-gradient(
+        90deg,
+        rgba(190, 78, 255, 0.08) 0%,
+        rgba(255, 74, 183, 0.08) 100%
+    );
+    --surface-card-subtle: linear-gradient(
+        90deg,
+        rgba(190, 78, 255, 0.05) 0%,
+        rgba(255, 74, 183, 0.05) 100%
+    );
+    --surface-highlight: linear-gradient(
+        90deg,
+        rgba(83, 45, 114, 0.1) 0%,
+        rgba(83, 45, 114, 0.26) 50%,
+        rgba(83, 45, 114, 0.1) 100%
+    );
+    --surface-specs-bar: rgba(255, 237, 248, 0.8);
+    --surface-menu-button: rgba(157, 146, 165, 1);
+    --surface-dropdown-row: linear-gradient(
+        90deg,
+        rgba(249, 240, 237, 0.3) 0%,
+        rgba(204, 203, 211, 0.16) 40%,
+        rgba(225, 220, 223, 0.3) 100%
+    );
+    --surface-indicator: linear-gradient(
+        90deg,
+        rgba(179, 182, 200, 1) 0%,
+        rgba(255, 255, 255, 1) 100%
+    );
+    --surface-best-choice: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+
+    /* Skeleton & controls */
+    --skeleton-bone: rgba(255, 255, 255, 0.14);
+    --list-item-hover-bg: rgba(255, 255, 255, 0.06);
+    --menu-dots-inactive: #4a4450;
+
+  /* Mask (plan card animated border) */
+    --mask-solid: #000;
+
+    /* Card border shine */
+    --shine-lilac-18: rgba(230, 188, 255, 0.18);
+    --shine-lilac-28: rgba(230, 188, 255, 0.28);
+    --shine-lilac-44: rgba(230, 188, 255, 0.44);
+    --shine-lilac-70: rgba(230, 188, 255, 0.7);
+    --shine-lilac-95: rgba(230, 188, 255, 0.95);
+    --shine-white-72: rgba(255, 255, 255, 0.72);
+    --shine-white-95: rgba(255, 255, 255, 0.95);
+    --shine-accent-32: rgba(255, 74, 183, 0.32);
+
+    /* Shadows */
+    --shadow-elevated-sm: 0 1px 0 rgba(0, 0, 0, 0.05);
+    --shadow-elevated-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 0 48px 0 rgba(0, 0, 0, 0.45);
+    --shadow-dropdown: 0 0 48px 0 rgba(0, 0, 0, 0.2);
 
     font-family: Inter, sans-serif;
     letter-spacing: 0.18px;

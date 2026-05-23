@@ -10,14 +10,11 @@
     padding: 7px;
     border: 1px solid var(--border);
     border-radius: 10px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(153, 153, 153, 0.1) 100%);
-    box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.05);
+    background: var(--surface-glass);
+    box-shadow: var(--shadow-elevated-sm);
     backdrop-filter: blur(22px);
     box-sizing: border-box;
     transition: border-color 0.2s ease;
-    //&:hover{
-    //  border-color: var(--border-h);
-    //}
 }
 
 @include tablet {
@@ -26,13 +23,13 @@
         width: 100%;
     }
 }
+
 .indicator {
     position: absolute;
-
     left: 0;
     height: calc(100% - 8px);
     border-radius: 10px;
-    background: linear-gradient(90deg, rgba(179, 182, 200, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    background: var(--surface-indicator);
     pointer-events: none;
     z-index: 0;
     transition:
