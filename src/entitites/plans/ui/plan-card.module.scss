@@ -7,16 +7,21 @@
     contain: paint;
     border-radius: 32px;
     padding: 1px;
+    box-sizing: border-box;
     pointer-events: none;
     filter: none;
     transition: filter 0.2s ease;
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0) border-box;
+    mask-image:
+        linear-gradient(#000 0 0),
+        linear-gradient(#000 0 0);
+    mask-origin: content-box, border-box;
+    mask-clip: content-box, border-box;
     mask-composite: exclude;
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0) border-box;
+    -webkit-mask-image:
+        linear-gradient(#000 0 0),
+        linear-gradient(#000 0 0);
+    -webkit-mask-origin: content-box, border-box;
+    -webkit-mask-clip: content-box, border-box;
     -webkit-mask-composite: xor;
 }
 
