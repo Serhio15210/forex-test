@@ -1,0 +1,143 @@
+@use "@/shared/styles/mixins.scss" as *;
+
+@keyframes skeletonPulse {
+    0% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    100% {
+        opacity: 0.45;
+    }
+}
+
+.planCardSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    border: 1px solid rgba(190, 78, 255, 0.35);
+    border-radius: 32px;
+    background: linear-gradient(90deg, rgba(190, 78, 255, 0.08) 0%, rgba(255, 74, 183, 0.08) 100%);
+}
+
+.bone {
+    display: block;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.14);
+    animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: 24px;
+    background: rgba(67, 43, 84, 0.55);
+}
+
+.titleBlock {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title {
+    width: 70%;
+    height: 24px;
+}
+
+.price {
+    width: 45%;
+    height: 24px;
+}
+
+.icon {
+    width: 48px;
+    height: 40px;
+    border-radius: 12px;
+}
+
+.specsBar {
+    width: 100%;
+    height: 32px;
+    border-radius: 999px;
+}
+
+.terminalsRow {
+    width: 100%;
+    height: 40px;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.feature {
+    width: 100%;
+    height: 36px;
+    border-radius: 8px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    width: 88px;
+    height: 28px;
+    border-radius: 4px;
+}
+
+.footer {
+    display: flex;
+    gap: 12px;
+}
+
+.buyButton {
+    flex: 1;
+    height: 52px;
+    border-radius: 999px;
+}
+
+.cartButton {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+}
+
+@include mobile-sm {
+    .planCardSkeleton {
+        gap: 12px;
+        padding: 12px;
+        border-radius: 24px;
+    }
+
+    .header {
+        padding: 12px 10px;
+        border-radius: 14px;
+    }
+
+    .buyButton {
+        height: 48px;
+    }
+
+    .cartButton {
+        width: 48px;
+        height: 48px;
+    }
+}

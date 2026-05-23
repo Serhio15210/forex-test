@@ -1,0 +1,51 @@
+import {useCallback, useId, useRef, useState} from 'react';
+import {buildSpecsLine} from '@/entitites/plans/lib/format-plan';
+import {formatDetailLabel} from '@/entitites/plans/lib/format-detail-label';
+import type {Plan} from '@/entitites/plans/model/types';
+import {useDismissOnOutside} from '@/shared/lib/hooks';
+import styles from './features-dropdown.module.scss';
+
+type FeaturesDropdownProps = {
+    plan: Plan;
+};
+
+export const FeaturesDropdown = ({plan}: FeaturesDropdownProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const listId = useId();
+    const specsLine = buildSpecsLine(plan);
+
+    const closeDropdown = useCallback(() => setIsOpen(false), []);
+    const toggleDropdown = useCallback(() => setIsOpen((open) => !open), []);
+
+    useDismissOnOutside(wrapperRef, {isActive: isOpen, onDismiss: closeDropdown});
+
+    return (
+        <div ref={wrapperRef} className={styles.wrapper}>
+            <div className={`${styles.specsBar} ${isOpen ? styles.menuButtonActive : ''}`}>
+                <span className={styles.specsText}>{specsLine}</span>
+                <button
+                    type="button"
+                    className={`${styles.menuButton} ${isOpen ? styles.menuButtonActive : ''}`}
+                    aria-label="Show plan details"
+                    aria-expanded={isOpen}
+                    aria-controls={listId}
+                    onClick={toggleDropdown}
+                >
+                    <span className={styles.menuDots} />
+                </button>
+            </div>
+
+            {isOpen ? (
+                <ul id={listId} className={styles.dropdown} role="list">
+                    {plan.details.map((detail) => (
+                        <li key={detail.name} className={styles.dropdownRow}>
+                            <span className={styles.dropdownLabel}>{formatDetailLabel(detail.name)}</span>
+                            <span className={styles.dropdownValue}>{detail.value}</span>
+                        </li>
+                    ))}
+                </ul>
+            ) : null}
+        </div>
+    );
+};

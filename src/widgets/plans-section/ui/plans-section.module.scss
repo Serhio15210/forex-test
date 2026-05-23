@@ -1,0 +1,70 @@
+@use "@/shared/styles/mixins.scss" as *;
+
+.plansSectionArea {
+    min-height: 560px;
+    margin-top: 36px;
+    margin-bottom: 36px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.plansSection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, $plan-card-grid-min), 1fr));
+    gap: 20px;
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+}
+
+@include mobile-sm {
+    .plansSection {
+        gap: 16px;
+    }
+
+    .plansSectionArea {
+        min-height: 480px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .statePanel {
+        min-height: 480px;
+        padding: 24px 16px;
+        border-radius: 24px;
+    }
+
+    .stateTitle {
+        font-size: 20px;
+    }
+}
+
+.statePanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 560px;
+    padding: 32px 24px;
+    border: 1px solid rgba(190, 78, 255, 0.35);
+    border-radius: 32px;
+    background: linear-gradient(90deg, rgba(190, 78, 255, 0.08) 0%, rgba(255, 74, 183, 0.08) 100%);
+    text-align: center;
+}
+
+.stateTitle {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.stateText {
+    margin: 0;
+    max-width: 420px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+}

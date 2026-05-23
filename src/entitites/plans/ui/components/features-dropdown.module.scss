@@ -1,0 +1,184 @@
+@use "@/shared/styles/mixins.scss" as *;
+
+$block-radius: 16px;
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.wrapperOpen {
+    z-index: 10;
+}
+
+.specsBar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 4px 4px 9px;
+    border-radius: 999px;
+    background: rgba(255, 237, 248, 0.8);
+    transition: background-color 0.25s ease;
+}
+
+.specsBarOpen {
+    background: rgba(154, 66, 232, 1);
+
+    .specsText {
+        color: var(--text);
+    }
+}
+
+.specsText {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--text-h);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.25s ease;
+}
+
+.menuButton {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(157, 146, 165, 1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.menuButtonActive {
+    background: #ffffff;
+}
+
+.menuDots {
+    display: block;
+    width: 3px;
+    height: 11px;
+    background:
+        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center top / 3px 3px no-repeat,
+        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center / 3px 3px no-repeat,
+        radial-gradient(circle, #ffffff 1.5px, transparent 1.6px) center bottom / 3px 3px no-repeat;
+    transition:
+        width 0.2s ease,
+        height 0.2s ease,
+        background 0.2s ease;
+}
+
+.menuButtonActive .menuDots {
+    width: 11px;
+    height: 3px;
+    background:
+        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) left center / 3px 3px no-repeat,
+        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) center / 3px 3px no-repeat,
+        radial-gradient(circle, #4a4450 1.5px, transparent 1.6px) right center / 3px 3px no-repeat;
+}
+
+.dropdownPanel {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0s linear 0.2s;
+}
+
+.wrapperOpen .dropdownPanel {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0s linear 0s;
+}
+
+.dropdownPanelInner {
+    overflow: hidden;
+    border-radius: $block-radius;
+    box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 10px;
+    border-radius: $block-radius;
+    background: rgba(154, 66, 232, 1);
+    list-style: none;
+}
+
+.dropdownRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 3px 8px;
+    padding-right: 15px;
+    border-radius: 6px;
+    background: linear-gradient(
+        90deg,
+        rgba(249, 240, 237, 0.3) 0%,
+        rgba(204, 203, 211, 0.16) 40%,
+        rgba(225, 220, 223, 0.3) 100%
+    );
+}
+
+.dropdownLabel {
+    font-size: 14px;
+    color: var(--text);
+}
+
+.dropdownValue {
+    font-size: 14px;
+    color: var(--text);
+    text-align: right;
+}
+
+@include mobile-sm {
+    .wrapper {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .specsBar {
+        gap: 6px;
+        padding: 4px 4px 4px 8px;
+    }
+
+    .specsText {
+        font-size: 11px;
+    }
+
+    .dropdownLabel,
+    .dropdownValue {
+        font-size: 13px;
+    }
+
+    .dropdownRow {
+        gap: 8px;
+        padding-right: 10px;
+    }
+}

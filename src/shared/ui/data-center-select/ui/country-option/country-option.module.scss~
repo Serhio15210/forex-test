@@ -1,0 +1,35 @@
+.option {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.optionSelected {
+  color: var(--text-h);
+}
+
+.flag {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 16px;
+  line-height: 16px;
+  color: rgba(190, 172, 199, 1);
+}

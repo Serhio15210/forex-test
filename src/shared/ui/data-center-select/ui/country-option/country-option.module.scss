@@ -1,0 +1,63 @@
+@use "@/shared/styles/mixins.scss" as *;
+
+.option {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(190, 172, 199, 1);
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+}
+
+.optionSelected {
+    color: var(--text-h);
+}
+
+.flag {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+@include tablet {
+    .option {
+        flex: 1 1 0;
+        min-width: 0;
+        justify-content: center;
+        padding: 10px 8px;
+    }
+
+    .name {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+@include mobile-sm {
+    .option {
+        padding: 10px 6px;
+        gap: 3px;
+    }
+
+    .name {
+        font-size: 13px;
+        line-height: 14px;
+    }
+}

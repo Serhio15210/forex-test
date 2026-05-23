@@ -1,0 +1,19 @@
+import type { DateFilterPeriod } from "@/shared/types/date-filter-period";
+import { usePlansSection } from "../hooks/use-plans-section";
+import { PlansSectionContent } from "./components";
+import styles from "./plans-section.module.scss";
+
+export type PlansSectionProps = {
+    datacenter?: number;
+    fperiod: DateFilterPeriod;
+};
+
+export const PlansSection = ({ datacenter, fperiod }: PlansSectionProps) => {
+    const state = usePlansSection({ datacenter, fperiod });
+
+    return (
+        <div className={styles.plansSectionArea}>
+            <PlansSectionContent state={state} fperiod={fperiod} />
+        </div>
+    );
+};

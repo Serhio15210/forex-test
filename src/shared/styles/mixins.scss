@@ -1,0 +1,61 @@
+// Layout
+$layout-max-width: 1440px;
+
+// Breakpoints (max-width)
+$bp-root-padding: 1439px;
+$bp-tablet: 1024px;
+$bp-mobile: 768px;
+$bp-mobile-md: 640px;
+$bp-mobile-sm: 480px;
+
+// Components
+$plan-card-grid-min: 340px;
+
+@mixin media-below($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin media-above($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+// Viewport already below $layout-max-width — side padding for #root
+@mixin root-padding {
+    @include media-below($bp-root-padding) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @include media-below($bp-tablet) {
+        @content;
+    }
+}
+
+@mixin mobile {
+    @include media-below($bp-mobile) {
+        @content;
+    }
+}
+
+@mixin mobile-md {
+    @include media-below($bp-mobile-md) {
+        @content;
+    }
+}
+
+@mixin mobile-sm {
+    @include media-below($bp-mobile-sm) {
+        @content;
+    }
+}
+
+@mixin reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        @content;
+    }
+}

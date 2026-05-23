@@ -1,0 +1,603 @@
+@use '@/shared/styles/mixins.scss' as *;
+.fehBorderMask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  contain: paint;
+  border-radius: 32px;
+  padding: 1px;
+  pointer-events: none;
+  filter: none;
+  transition: filter 0.2s ease;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) border-box;
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) border-box;
+  -webkit-mask-composite: xor;
+}
+
+.fehBorderGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background:
+    conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg,
+      transparent 238deg,
+      rgba(230, 188, 255, 0.18) 252deg,
+      rgba(255, 255, 255, 0.95) 268deg,
+      rgba(230, 188, 255, 0.44) 282deg,
+      transparent 304deg,
+      transparent 360deg
+    );
+  opacity: 0.85;
+  transform: translate(-50%, -10%) rotate(0deg);
+  transform-origin: 50% 50%;
+  animation: rotateShine 5s linear infinite;
+  will-change: transform, opacity, width;
+}
+
+.planCard:hover .fehBorderGlow {
+  height: 22px;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(230, 188, 255, 0.95) 16%,
+      rgba(230, 188, 255, 0.28) 44%,
+      transparent 72%
+    );
+  animation:
+    hoverShineMove 1s cubic-bezier(0.22, 0.72, 0.18, 1) forwards,
+    hoverShinePulse 1.4s ease-in-out 1s infinite;
+}
+
+.planCard:hover .fehBorderMask {
+  filter:
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.72))
+    drop-shadow(0 0 14px rgba(230, 188, 255, 0.7))
+    drop-shadow(0 0 28px rgba(255, 74, 183, 0.32));
+}
+
+@keyframes rotateShine {
+  0% {
+    transform: translate(-50%, -10%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -10%) rotate(360deg);
+  }
+}
+
+@keyframes hoverShineMove {
+  0% {
+    left: 0;
+    top: 0;
+    width: 54px;
+    opacity: 0;
+    transform: translate(-70%, -48%);
+  }
+
+  18% {
+    opacity: 0.9;
+  }
+
+  72% {
+    left: 84%;
+    top: 0;
+    width: 92px;
+    opacity: 0.95;
+    transform: translate(-50%, -48%);
+  }
+
+  100% {
+    left: 50%;
+    top: 0;
+    width: 184px;
+    opacity: 1;
+    transform: translate(-50%, -48%);
+  }
+}
+
+@keyframes hoverShinePulse {
+  0%,
+  100% {
+    left: 50%;
+    top: 0;
+    width: 164px;
+    opacity: 0.52;
+    transform: translate(-50%, -48%);
+  }
+
+  50% {
+    left: 50%;
+    top: 0;
+    width: 212px;
+    opacity: 1;
+    transform: translate(-50%, -48%);
+  }
+}
+.planCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  border: 1px solid rgba(190, 78, 255, 0.5);
+  border-radius: 32px;
+  padding: 16px;
+  background: linear-gradient(90deg, rgba(190, 78, 255, 0.05) 0%, rgba(255, 74, 183, 0.1) 100%);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 0 48px 0 rgba(0, 0, 0, 0.45);
+
+  &:hover {
+    .header {
+      background: rgba(197, 64, 146, 1);
+    }
+
+    .currency,
+    .amount {
+      color: var(--text);
+    }
+  }
+}
+.bestChoice {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(255, 74, 183, 1) 0%, rgba(200, 48, 185, 1) 100%);
+  border: 1px solid rgba(111, 47, 149, 1);
+  padding: 3px 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text);
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+.planCardSoldOut {
+  border-color: rgba(255, 255, 255, 0.25);
+
+  &:hover .soldOutTooltip,
+  &:focus-within .soldOutTooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  &:hover {
+    .header {
+      background: rgba(67, 43, 84, 1);
+    }
+
+    .currency,
+    .amount {
+      color: var(--accent);
+    }
+  }
+}
+
+.soldOutTooltip {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 5;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(43, 27, 54, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(4px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 12px;
+
+  border-radius: 16px;
+  background: rgba(67, 43, 84, 1);
+  transition: background-color 0.2s ease;
+
+  .row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+}
+
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.titleIcons {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+  padding-top: 4px;
+
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+}
+
+.currency,
+.amount {
+  transition: color 0.2s ease;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.period {
+  font-size: 16px;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@mixin highlight-row-surface {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(83, 45, 114, 0.1) 0%,
+    rgba(83, 45, 114, 0.26) 50%,
+    rgba(83, 45, 114, 0.1) 100%
+  );
+}
+
+.terminalsRow {
+  @include highlight-row-surface;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminalsIcon {
+  flex-shrink: 0;
+}
+
+.terminalsLabel {
+  font-size: 14px;
+
+  color: var(--text);
+}
+
+.terminalsValue {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.terminalsHintWrapper {
+  position: relative;
+  flex-shrink: 0;
+
+  &:hover .terminalsTooltip,
+  &:focus-within .terminalsTooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.terminalsHintButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: help;
+}
+
+.terminalsTooltip {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  z-index: 5;
+  width: max-content;
+  max-width: 260px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(43, 27, 54, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(4px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.featuresList {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featureItem {
+  @include highlight-row-surface;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text);
+
+  img {
+    flex-shrink: 0;
+  }
+
+  span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(145, 62, 245, 0.2);
+  font-size: 13px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.buyButton {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 14px 24px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 74, 183, 0.12);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+a.buyButton:hover {
+  background: rgba(255, 74, 183, 0.12);
+}
+
+.cartButton {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 74, 183, 0.12);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+@include mobile-sm {
+  .planCard {
+    gap: 12px;
+    padding: 12px;
+    border-radius: 24px;
+  }
+
+  .bestChoice {
+    max-width: calc(100% - 24px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+  }
+
+  .header {
+    gap: 10px;
+    padding: 12px 10px;
+    border-radius: 14px;
+
+    .row {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .column {
+      flex: 1 1 160px;
+      min-width: 0;
+    }
+  }
+
+  .titleRow {
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 20px;
+    overflow-wrap: anywhere;
+  }
+
+  .titleIcons {
+    padding-top: 0;
+
+    img {
+      width: auto;
+      max-width: 44px;
+      height: auto;
+    }
+  }
+
+  .priceRow {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  .currency,
+  .amount {
+    font-size: 20px;
+  }
+
+  .period {
+    font-size: 14px;
+  }
+
+  .terminalsRow {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .terminalsLabel,
+  .terminalsValue {
+    font-size: 13px;
+  }
+
+  .featureItem {
+    gap: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .tag {
+    font-size: 12px;
+  }
+
+  .footer {
+    gap: 8px;
+    margin-top: 0;
+  }
+
+  .buyButton {
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+
+  .cartButton {
+    width: 48px;
+    height: 48px;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

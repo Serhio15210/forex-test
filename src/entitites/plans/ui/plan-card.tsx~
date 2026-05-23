@@ -1,0 +1,48 @@
+import type {Plan} from '../model/types';
+import type {DateFilterPeriod} from '@/shared/types/date-filter-period';
+import {PlanCardFooter} from './components/plan-card-footer';
+import {PlanCardHeader} from './components/plan-card-header';
+import {PlanCardStatus} from './components/plan-card-status';
+import {PlanFeaturesSection} from './components/plan-features-section';
+import {PlanTagsSection} from './components/plan-tags-section';
+import {PlanTerminalsRow} from './components/plan-terminals-row';
+import {usePlanCardViewModel} from './hooks/use-plan-card-view-model';
+import styles from './plan-card.module.scss';
+
+
+export type PlanCardProps = {
+    plan: Plan;
+    fperiod: DateFilterPeriod;
+    isBestChoice?: boolean;
+};
+
+export const PlanCard = ({plan, fperiod, isBestChoice = false}: PlanCardProps) => {
+    const viewModel = usePlanCardViewModel({plan, fperiod});
+
+    return (
+        <article className={`${styles.planCard} ${plan.soldOut ? styles.planCardSoldOut : ''}`}>
+            <div className={styles.fehBorderMask}>
+                <div className={styles.fehBorderGlow}></div>
+            </div>
+            <PlanCardStatus
+                isBestChoice={isBestChoice}
+                isSoldOut={plan.soldOut}
+                soldOutTooltip={viewModel.soldOutTooltip}
+            />
+            <PlanCardHeader
+                plan={plan}
+                displayName={viewModel.displayName}
+                currencySymbol={viewModel.currencySymbol}
+                price={viewModel.price}
+                periodLabel={viewModel.periodLabel}
+                componentIcon={viewModel.componentIcon}
+            />
+            {viewModel.terminalsCount ? (
+                <PlanTerminalsRow terminalsCount={viewModel.terminalsCount}/>
+            ) : null}
+            <PlanFeaturesSection features={viewModel.features}/>
+            <PlanTagsSection tags={viewModel.tags}/>
+            <PlanCardFooter buyHref={viewModel.buyHref} isSoldOut={plan.soldOut}/>
+        </article>
+    );
+};
